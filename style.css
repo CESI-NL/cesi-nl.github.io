@@ -1,0 +1,179 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.responsive-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+header {
+    background-image: url('images/logos/CESI\ logo.png');
+    background-size: cover;
+    color: rgb(13, 13, 14);
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80%;
+    height: auto;
+    padding: 230px 0;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+
+nav {
+    background: #52D4FC;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: #043BCB;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Ensure section backgrounds are responsive */
+section {
+    padding: 80px;
+    height: fit-content; /* Use vh units for height */
+    width: 100%; /* Ensure sections take up full width */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+#section1 { background: #FFFFFF; }
+#section2 { background: #EDF5FB; }
+#section3 { background: #00FFA6; }
+#section4 { background: #FFFFFF; }
+#section5 { background: #EDF5FB; }
+#section6 { background: #00FFA6; }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    section {
+        padding: 60px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 40px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 20px;
+        height: fit-content;
+    }
+} 
+
+/*for grid of pictures and text*/
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.grid-item {
+    text-align: center;
+}
+.grid-item img {
+    width: 100%;
+    max-width: 150px; /* Adjust as needed */
+    height: auto;
+}
+.text-row {
+    margin-top: 10px;
+}
+
+/* for Thematic Groups */
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between rows and columns */
+}
+
+.image-grid img {
+    width: 200px; /* Set the width of the images */
+    height: 150px; /* Set the height of the images */
+    object-fit: cover; /* Ensure images cover the set dimensions */
+}
+
+/* for Contact Form*/
+.contact-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+}
+.contact-form h2 {
+    margin-bottom: 15px;
+}
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.contact-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #043BCB;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.contact-form button:hover {
+    background-color: #52D4FC;
+}
+.message {
+    margin-top: 10px;
+}
+
+/*for Footer*/
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+        .footer-column {
+            flex: 1;
+            padding: 10px;
+        }
