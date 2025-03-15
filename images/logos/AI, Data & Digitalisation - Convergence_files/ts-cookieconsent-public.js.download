@@ -1,0 +1,1001 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./js/ts-cookieconsent-public.js":
+/*!***************************************!*\
+  !*** ./js/ts-cookieconsent-public.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var TSCOOKIE = {
+
+	cookie: {
+
+		necessary: true,
+		preferences: false,
+		statistics: false,
+		marketing: false
+
+	},
+	responded: false,
+	accepted: false,
+	declined: false
+
+};
+
+/*
+JS hooks demo
+
+document.addEventListener('tscookiesLoaded', function() {
+
+	alert( 'load' );
+
+});
+
+document.addEventListener('tscookiesSetConsent', function() {
+
+	alert( 'consent' );
+
+});
+*/
+
+var dataLayer = window.dataLayer = window.dataLayer || null;
+
+;(function ($, undefined) {
+
+	$.fn.outerHTML = function (s) {
+		return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
+	};
+
+	var TSCOOKIE = {
+
+		pluginURL: tsCookieConsent.pluginsUrl,
+		templateType: tsCookieConsent.templateType,
+		version: tsCookieConsent.version,
+		wildcard: tsCookieConsent.wildcard,
+		sessionHash: '',
+
+		init: {
+
+			init: function () {
+
+				TSCOOKIE.sessionHash = TSCOOKIE.init.createHash();
+
+				TSCOOKIE.cookie.checkCookieVersion();
+
+				TSCOOKIE.html.loadTemplate();
+			},
+
+			initAfterRender: function () {
+
+				var cookie = TSCOOKIE.cookie.get();
+
+				if (!cookie) {
+
+					TSCOOKIE.html.showBanner();
+				} else {
+
+					TSCOOKIE.html.hideBanner();
+
+					TSCOOKIE.cookie.createObject(cookie.stamp, cookie.necessary, cookie.preferences, cookie.statistics, cookie.marketing, cookie.version);
+
+					TSCOOKIE.object.updateObject();
+
+					TSCOOKIE.gtm.init();
+				}
+
+				TSCOOKIE.sources.init();
+
+				TSCOOKIE.init.toggleBanner();
+
+				TSCOOKIE.hooks.triggerOnLoad();
+			},
+
+			toggleBanner: function () {
+
+				$(document).on('click', '.tsCookieSettings', function (e) {
+
+					e.preventDefault();
+
+					TSCOOKIE.html.showBanner();
+				});
+			},
+
+			createHash: function () {
+
+				var hash = "";
+
+				var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+				for (var i = 0; i < 128; i++) {
+
+					hash += possible.charAt(Math.floor(Math.random() * possible.length));
+				}
+
+				return hash;
+			}
+
+		},
+
+		cookie: {
+
+			name: 'CookieConsent',
+			necessary: true,
+			preferences: false,
+			statistics: false,
+			marketing: false,
+
+			set: function (hash, necessary, preferences, statistics, marketing, version) {
+
+				var CookieConsentObject = TSCOOKIE.cookie.createObject(hash, necessary, preferences, statistics, marketing, version);
+
+				var expireDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+
+				if (TSCOOKIE.wildcard === 'true') {
+
+					var domainname = "." + location.hostname.split('.').reverse()[1] + "." + location.hostname.split('.').reverse()[0];
+
+					console.log(domainname);
+
+					document.cookie = TSCOOKIE.cookie.name + "=" + JSON.stringify(CookieConsentObject) + "; domain=" + domainname + "; path=/; expires=" + expireDate.toUTCString() + ";";
+				} else {
+
+					console.log('cookie');
+
+					document.cookie = TSCOOKIE.cookie.name + "=" + JSON.stringify(CookieConsentObject) + "; path=/; expires=" + expireDate.toUTCString() + ";";
+				}
+
+				TSCOOKIE.cookie.log(CookieConsentObject);
+
+				TSCOOKIE.object.updateObject();
+
+				TSCOOKIE.hooks.triggerOnConsent();
+			},
+
+			get: function () {
+
+				var setcookie = document.cookie.match('(^|;)\\s*' + TSCOOKIE.cookie.name + '\\s*=\\s*([^;]+)');
+
+				return setcookie ? JSON.parse(setcookie.pop()) : '';
+			},
+
+			delete: function () {
+
+				document.cookie = TSCOOKIE.cookie.name + "=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+			},
+
+			log: function (cookieObject) {
+
+				$.post(tsCookieConsent.adminUrl, {
+
+					action: 'log_consent',
+					object: cookieObject,
+					url: window.location.href
+
+				}, function (data) {
+
+					//console.log( data );
+
+				});
+			},
+
+			createObject: function (hash, necessary, preferences, statistics, marketing, version) {
+
+				var cookieObject = {
+
+					stamp: hash,
+					necessary: necessary,
+					preferences: preferences,
+					statistics: statistics,
+					marketing: marketing,
+					version: version
+
+				};
+
+				TSCOOKIE.cookie.necessary = necessary;
+				TSCOOKIE.cookie.preferences = preferences;
+				TSCOOKIE.cookie.statistics = statistics;
+				TSCOOKIE.cookie.marketing = marketing;
+				TSCOOKIE.cookie.version = version;
+
+				return cookieObject;
+			},
+
+			checkCookieVersion: function () {
+
+				var cookie = TSCOOKIE.cookie.get();
+
+				if (cookie != null) {
+
+					if (cookie.version === undefined || cookie.version < TSCOOKIE.version) {
+
+						TSCOOKIE.cookie.delete();
+					}
+				}
+			}
+
+		},
+
+		html: {
+
+			html: '',
+
+			loadTemplate: function () {
+
+				var templateHtml = '';
+
+				var templateHtml = TSCOOKIE.templateType == 'advanced' ? tsCookieConsent.bar_template_advanced : tsCookieConsent.bar_template_basic;
+
+				if (tsCookieConsent.template_load == null || tsCookieConsent.template_load.indexOf('default') === 0 || templateHtml == '' || templateHtml == null) {
+
+					var templatePath = TSCOOKIE.templateType == 'advanced' ? 'templates/banner-advanced.mst' : 'templates/banner-basic.mst';
+
+					$.get(TSCOOKIE.pluginURL + templatePath, function (data) {
+
+						templateHtml = data;
+
+						TSCOOKIE.html.renderTemplate(templateHtml);
+					});
+				} else {
+
+					TSCOOKIE.html.renderTemplate(templateHtml);
+				}
+			},
+
+			renderTemplate: function (templateHtml) {
+
+				if (typeof tsCookieConsent.bar_policies_necessary !== 'undefined' && tsCookieConsent.bar_policies_necessary.length > 0) {
+
+					tsCookieConsent.bar_policies_necessary = {
+
+						'policies': tsCookieConsent.bar_policies_necessary
+
+					};
+				}
+
+				if (typeof tsCookieConsent.bar_policies_preferences !== 'undefined' && tsCookieConsent.bar_policies_preferences.length > 0) {
+
+					tsCookieConsent.bar_policies_preferences = {
+
+						'policies': tsCookieConsent.bar_policies_preferences
+
+					};
+				}
+
+				if (typeof tsCookieConsent.bar_policies_statistics !== 'undefined' && tsCookieConsent.bar_policies_statistics.length > 0) {
+
+					tsCookieConsent.bar_policies_statistics = {
+
+						'policies': tsCookieConsent.bar_policies_statistics
+
+					};
+				}
+
+				if (typeof tsCookieConsent.bar_policies_marketing !== 'undefined' && tsCookieConsent.bar_policies_marketing.length > 0) {
+
+					tsCookieConsent.bar_policies_marketing = {
+
+						'policies': tsCookieConsent.bar_policies_marketing
+
+					};
+				}
+
+				if (typeof tsCookieConsent.cookie_types !== 'undefined' && tsCookieConsent.cookie_types.length > 0) {
+
+					tsCookieConsent.bar_show_necessary = false;
+					if (tsCookieConsent.cookie_types.indexOf('necessary') > -1) {
+
+						tsCookieConsent.bar_show_necessary = true;
+					}
+
+					tsCookieConsent.bar_show_preferences = false;
+					if (tsCookieConsent.cookie_types.indexOf('preferences') > -1) {
+
+						tsCookieConsent.bar_show_preferences = true;
+					}
+
+					tsCookieConsent.bar_show_statistics = false;
+					if (tsCookieConsent.cookie_types.indexOf('statistics') > -1) {
+
+						tsCookieConsent.bar_show_statistics = true;
+					}
+
+					tsCookieConsent.bar_show_marketing = false;
+					if (tsCookieConsent.cookie_types.indexOf('marketing') > -1) {
+
+						tsCookieConsent.bar_show_marketing = true;
+					}
+				}
+
+				var rendered = Mustache.render(templateHtml, {
+
+					bannerPosition: tsCookieConsent.display_position[0],
+
+					bannerText: tsCookieConsent.bar_text,
+					bannerTextMobile: tsCookieConsent.bar_text_mobile,
+
+					btnAcceptLabel: tsCookieConsent.bar_button_accept_label,
+					btnDeclineLabel: tsCookieConsent.bar_button_decline_label,
+					btnEditLabel: tsCookieConsent.bar_button_edit_label,
+					btnDetailsLabel: tsCookieConsent.bar_button_details_label,
+					btnCancelLabel: tsCookieConsent.bar_button_cancel_label,
+					btnSaveLabel: tsCookieConsent.bar_button_save_label,
+
+					checkboxLabelNecessary: tsCookieConsent.bar_checkbox_necessary_label,
+					checkboxLabelPreferences: tsCookieConsent.bar_checkbox_preferences_label,
+					checkboxLabelStatistics: tsCookieConsent.bar_checkbox_statistics_label,
+					checkboxLabelMarketing: tsCookieConsent.bar_checkbox_marketing_label,
+
+					checkboxDescriptionNecessary: tsCookieConsent.bar_description_necessary,
+					checkboxDescriptionPreferences: tsCookieConsent.bar_description_preferences,
+					checkboxDescriptionStatistics: tsCookieConsent.bar_description_statistics,
+					checkboxDescriptionMarketing: tsCookieConsent.bar_description_marketing,
+
+					policiesNecessary: tsCookieConsent.bar_policies_necessary,
+					policiesPreferences: tsCookieConsent.bar_policies_preferences,
+					policiesStatistics: tsCookieConsent.bar_policies_statistics,
+					policiesMarketing: tsCookieConsent.bar_policies_marketing,
+
+					showNecessary: tsCookieConsent.bar_show_necessary,
+					showPreferences: tsCookieConsent.bar_show_preferences,
+					showStatistics: tsCookieConsent.bar_show_statistics,
+					showMarketing: tsCookieConsent.bar_show_marketing,
+
+					placeHolderContent: tsCookieConsent.bar_placeholder_content
+
+				});
+
+				TSCOOKIE.html.html = $('<div/>').html(rendered).contents();
+
+				$('body').append(TSCOOKIE.html.html);
+
+				$(document).on('click', '.tsCookieDecline', function (e) {
+
+					e.preventDefault();
+
+					TSCOOKIE.html.clickDecline(e);
+				});
+
+				$(document).on('click', '.tsCookieAccept', function (e) {
+
+					e.preventDefault();
+
+					TSCOOKIE.html.clickAccept(e);
+				});
+
+				TSCOOKIE.html.banner = TSCOOKIE.html.html.find('.tsCookieBanner');
+
+				TSCOOKIE.init.initAfterRender();
+
+				if (TSCOOKIE.templateType == 'advanced') {
+
+					$(document).on('click', '.tsCookieCancel', function (e) {
+
+						e.preventDefault();
+
+						TSCOOKIE.html.clickCancel(e);
+					});
+
+					$(document).on('click', '.tsCookieEdit', function (e) {
+
+						e.preventDefault();
+
+						TSCOOKIE.html.clickEdit(e);
+					});
+
+					$(document).on('click', '.tsCookieSave', function (e) {
+
+						e.preventDefault();
+
+						TSCOOKIE.html.clickSave(e);
+					});
+
+					$(document).on('click', '.tsCookieDetail', function (e) {
+
+						e.preventDefault();
+
+						TSCOOKIE.html.clickDetail(e);
+					});
+
+					TSCOOKIE.html.modal = TSCOOKIE.html.html.find('.tsCookieModal');
+
+					TSCOOKIE.html.initModal();
+				}
+			},
+
+			showBanner: function () {
+
+				TSCOOKIE.html.banner.show();
+			},
+
+			hideBanner: function () {
+
+				TSCOOKIE.html.banner.hide();
+			},
+
+			initModal: function () {
+
+				TSCOOKIE.html.html.find('#tsCookieNecessary').prop('checked', TSCOOKIE.cookie.necessary);
+				TSCOOKIE.html.html.find('#tsCookiePreferences').prop('checked', TSCOOKIE.cookie.preferences);
+				TSCOOKIE.html.html.find('#tsCookieStatistics').prop('checked', TSCOOKIE.cookie.statistics);
+				TSCOOKIE.html.html.find('#tsCookieMarketing').prop('checked', TSCOOKIE.cookie.marketing);
+
+				TSCOOKIE.html.html.find('#tsCookieNecessary').prop('disabled', true);
+
+				/* var policiesNecessary = tsCookieConsent.bar_policies_necessary;
+    var policiesPreferences = tsCookieConsent.bar_policies_preferences;
+    var policiesStatistics = tsCookieConsent.bar_policies_statistics;
+    var policiesMarketing = tsCookieConsent.bar_policies_marketing;
+    	if ( Array.isArray( policiesNecessary ) && !policiesNecessary[0]['title'] ) {
+    		TSCOOKIE.html.html.find( '.tsCookieDetailsNecessary' ).remove();
+    	}
+    	if ( Array.isArray( policiesPreferences ) && !policiesPreferences[0]['title'] ) {
+    		TSCOOKIE.html.html.find( '.tsCookieDetailsPreferences' ).remove();
+    	}
+    	if ( Array.isArray( policiesStatistics ) && !policiesStatistics[0]['title'] ) {
+    		TSCOOKIE.html.html.find( '.tsCookieDetailsStatistics' ).remove();
+    	}
+    	if ( Array.isArray( policiesMarketing ) && !policiesMarketing[0]['title'] ) {
+    		TSCOOKIE.html.html.find( '.tsCookieDetailsMarketing' ).remove();
+    	} */
+			},
+
+			showModal: function () {
+
+				TSCOOKIE.html.html.addClass('ts-cookie-consent--modal-open');
+			},
+
+			hideModal: function () {
+
+				TSCOOKIE.html.html.removeClass('ts-cookie-consent--modal-open');
+			},
+
+			toggleDetails: function (e) {
+
+				var container = $(e.target).parents('.ts-cookie-option');
+
+				if ($(container).hasClass('ts-cookie-option--details-open')) {
+
+					$(container).removeClass('ts-cookie-option--details-open');
+				} else {
+
+					$('.ts-cookie-option').removeClass('ts-cookie-option--details-open');
+
+					$(container).addClass('ts-cookie-option--details-open');
+				}
+			},
+
+			clickSave: function (e) {
+
+				e.preventDefault();
+
+				var necessary = TSCOOKIE.html.html.find('#tsCookieNecessary').prop('checked') ? true : false;
+				var preferences = TSCOOKIE.html.html.find('#tsCookiePreferences').prop('checked') ? true : false;
+				var statistics = TSCOOKIE.html.html.find('#tsCookieStatistics').prop('checked') ? true : false;
+				var marketing = TSCOOKIE.html.html.find('#tsCookieMarketing').prop('checked') ? true : false;
+
+				var version = TSCOOKIE.version;
+
+				TSCOOKIE.cookie.set(TSCOOKIE.sessionHash, necessary, preferences, statistics, marketing, version);
+
+				TSCOOKIE.html.reload();
+			},
+
+			clickAccept: function (e) {
+
+				e.preventDefault();
+
+				var version = TSCOOKIE.version;
+
+				TSCOOKIE.cookie.set(TSCOOKIE.sessionHash, true, true, true, true, version);
+
+				TSCOOKIE.sources.afterConsent();
+				TSCOOKIE.html.reload();
+			},
+
+			clickDecline: function (e) {
+
+				e.preventDefault();
+
+				var version = TSCOOKIE.version;
+
+				TSCOOKIE.cookie.set(TSCOOKIE.sessionHash, true, false, false, false, version);
+
+				TSCOOKIE.html.hideBanner();
+				TSCOOKIE.sources.afterConsent();
+			},
+
+			clickEdit: function (e) {
+
+				e.preventDefault();
+
+				TSCOOKIE.html.hideBanner();
+
+				TSCOOKIE.html.showModal();
+			},
+
+			clickCancel: function (e) {
+
+				e.preventDefault();
+
+				TSCOOKIE.html.showBanner();
+
+				TSCOOKIE.html.hideModal();
+			},
+
+			clickDetail: function (e) {
+
+				e.preventDefault();
+
+				TSCOOKIE.html.toggleDetails(e);
+			},
+
+			reload: function () {
+
+				if (tsCookieConsent.reload == 'hard') {
+
+					location.reload();
+				} else {
+
+					TSCOOKIE.html.hideBanner();
+					TSCOOKIE.html.hideModal();
+
+					TSCOOKIE.gtm.init();
+				}
+			}
+
+		},
+
+		object: {
+
+			updateObject: function () {
+
+				/*
+    console.log( 'necessary: ' + TSCOOKIE.cookie.necessary);
+    console.log( 'preferences: ' + TSCOOKIE.cookie.preferences);
+    console.log( 'statistics: ' + TSCOOKIE.cookie.statistics);
+    console.log( 'marketing: ' + TSCOOKIE.cookie.marketing);
+    	console.log( 'responded: ' + TSCOOKIE.responded);
+    console.log( 'accepted: ' + TSCOOKIE.accepted);
+    console.log( 'declined: ' + TSCOOKIE.declined);
+    console.log( '----------' );
+    */
+
+				var cookie = TSCOOKIE.cookie.get();
+
+				var cookieAccepted = false;
+				var cookieDeclined = false;
+
+				if (cookie != null) {
+
+					cookieAccepted = true;
+
+					TSCOOKIE.responded = true;
+				}
+
+				if (cookie.necessary != null && typeof cookie.necessary === 'boolean') {
+
+					TSCOOKIE.cookie.necessary = cookie.necessary;
+
+					if (cookie.necessary === false) {
+
+						cookieAccepted = false;
+						cookieDeclined = true;
+					}
+				}
+
+				if (cookie.preferences != null && typeof cookie.preferences === 'boolean') {
+
+					TSCOOKIE.cookie.preferences = cookie.preferences;
+
+					if (cookie.preferences === false) {
+
+						cookieAccepted = false;
+						cookieDeclined = true;
+					}
+				}
+
+				if (cookie.statistics != null && typeof cookie.statistics === 'boolean') {
+
+					TSCOOKIE.cookie.statistics = cookie.statistics;
+
+					if (cookie.statistics === false) {
+
+						cookieAccepted = false;
+						cookieDeclined = true;
+					}
+				}
+
+				if (cookie.marketing != null && typeof cookie.marketing === 'boolean') {
+
+					TSCOOKIE.cookie.marketing = cookie.marketing;
+
+					if (cookie.marketing === false) {
+
+						cookieAccepted = false;
+						cookieDeclined = true;
+					}
+				}
+
+				TSCOOKIE.accepted = cookieAccepted;
+				TSCOOKIE.declined = cookieDeclined;
+
+				/*
+    console.log( 'necessary: ' + TSCOOKIE.cookie.necessary);
+    console.log( 'preferences: ' + TSCOOKIE.cookie.preferences);
+    console.log( 'statistics: ' + TSCOOKIE.cookie.statistics);
+    console.log( 'marketing: ' + TSCOOKIE.cookie.marketing);
+    	console.log( 'responded: ' + TSCOOKIE.responded);
+    console.log( 'accepted: ' + TSCOOKIE.accepted);
+    console.log( 'declined: ' + TSCOOKIE.declined);
+    */
+			}
+
+		},
+
+		gtm: {
+
+			interval: '',
+
+			timing: 100, // checking every 0.1 seconds
+			timeOut: 3000, // max running 3 seconds
+			timeRunning: 0, // counter
+
+			init: function () {
+
+				if (tsCookieConsent.gtm == null || tsCookieConsent.gtm != 'true') {
+
+					TSCOOKIE.gtm.timeRunning = 0;
+
+					TSCOOKIE.gtm.interval = setInterval(TSCOOKIE.gtm.checkForDataLayer, TSCOOKIE.gtm.timing);
+				}
+			},
+
+			checkForDataLayer: function () {
+
+				TSCOOKIE.gtm.timeRunning = TSCOOKIE.gtm.timeRunning + TSCOOKIE.gtm.timing;
+
+				if (dataLayer != null) {
+
+					TSCOOKIE.gtm.pushToDataLayer();
+				}
+
+				if (dataLayer != null || TSCOOKIE.gtm.timeRunning >= TSCOOKIE.gtm.timeOut) {
+
+					clearInterval(TSCOOKIE.gtm.interval);
+				}
+			},
+
+			pushToDataLayer: function () {
+
+				if (TSCOOKIE.cookie.preferences) {
+
+					dataLayer.push({ 'event': 'cookieconsent_preferences' });
+				}
+
+				if (TSCOOKIE.cookie.statistics) {
+
+					dataLayer.push({ 'event': 'cookieconsent_statistics' });
+				}
+
+				if (TSCOOKIE.cookie.marketing) {
+
+					dataLayer.push({ 'event': 'cookieconsent_marketing' });
+				}
+			}
+
+		},
+
+		hooks: {
+
+			triggerOnLoad: function () {
+
+				var event = new Event('tscookiesLoaded');
+
+				TSCOOKIE.hooks.triggerDocument(event);
+			},
+
+			triggerOnConsent: function () {
+
+				var event = new Event('tscookiesSetConsent');
+
+				TSCOOKIE.hooks.triggerDocument(event);
+			},
+
+			triggerDocument: function (event) {
+
+				document.dispatchEvent(event);
+			}
+
+		},
+
+		sources: {
+
+			init: function () {
+
+				//audio
+				//video
+				//iframe
+				//embed
+				//img
+				//script
+				//source
+				//track
+
+				// NOTE: only fire this function on first load, after that, use afterConsent();
+
+				if (tsCookieConsent.placeholder !== null && tsCookieConsent.placeholder.indexOf('true') === 0) {
+
+					$.get(TSCOOKIE.pluginURL + 'templates/placeholder.mst', function (data) {
+
+						templateHtml = data;
+
+						$('[data-src]').each(function (i) {
+
+							$element = $(this);
+
+							var consent = $element.data('consent');
+
+							if (consent) {
+
+								var content = Mustache.render(tsCookieConsent.bar_placeholder_content, {
+
+									placeholder_cookies: consent
+
+								});
+
+								var newElement = Mustache.render(templateHtml, {
+
+									placeholder_original: $element.outerHTML(),
+									placeholder_content: content
+
+								});
+
+								$element.after(newElement);
+								$element.remove();
+
+								TSCOOKIE.sources.afterConsent();
+							}
+						});
+					});
+				} else {
+
+					TSCOOKIE.sources.afterConsent();
+				}
+			},
+
+			afterConsent: function () {
+
+				$('[data-src]').each(function (i) {
+
+					$element = $(this);
+
+					var consent = $element.data('consent');
+
+					var src = $element.data('src');
+
+					if (consent && src) {
+
+						TSCOOKIE.sources.load($element, consent, src);
+					}
+				});
+			},
+
+			load: function ($element, consent, src) {
+
+				var loadElement = true;
+
+				consent = consent.split(',');
+
+				if (consent.indexOf('necessary') >= 0 && TSCOOKIE.cookie.necessary === false) {
+
+					loadElement = false;
+				}
+
+				if (consent.indexOf('preferences') >= 0 && TSCOOKIE.cookie.preferences === false) {
+
+					loadElement = false;
+				}
+
+				if (consent.indexOf('statistics') >= 0 && TSCOOKIE.cookie.statistics === false) {
+
+					loadElement = false;
+				}
+
+				if (consent.indexOf('marketing') >= 0 && TSCOOKIE.cookie.marketing === false) {
+
+					loadElement = false;
+				}
+
+				if (loadElement) {
+
+					$element.attr('src', src);
+
+					if (tsCookieConsent.placeholder.indexOf('true') === 0) {
+
+						$element.parent().find('.placeholderCover').hide();
+					}
+				} else {
+
+					var attr = $element.attr('src');
+
+					if (typeof attr !== typeof undefined && attr !== false) {
+
+						$element.removeAttr('src');
+					}
+
+					if (tsCookieConsent.placeholder.indexOf('true') === 0) {
+
+						$element.parent().find('.placeholderCover').show();
+					}
+				}
+			}
+
+		},
+
+		analytics: {
+
+			getCookiesArray: function () {
+
+				var cookies = {};
+
+				if (document.cookie && document.cookie != '') {
+
+					var split = document.cookie.split(';');
+
+					for (var i = 0; i < split.length; i++) {
+
+						var name_value = split[i].split("=");
+
+						name_value[0] = name_value[0].replace(/^ /, '');
+
+						cookies[decodeURIComponent(name_value[0])] = decodeURIComponent(name_value[1]);
+					}
+				}
+
+				return cookies;
+			}
+
+		}
+
+	};
+
+	var UTIL = {
+
+		exec: function (controller, action) {
+
+			var ns = TSCOOKIE;
+			action = action === undefined ? 'init' : action;
+
+			if (controller !== '' && ns[controller] && typeof ns[controller][action] === 'function') {
+
+				ns[controller][action]();
+			}
+		},
+
+		init: function () {
+
+			UTIL.exec('init');
+		}
+
+	};
+
+	//$.TSCOOKIE = TSCOOKIE; // Make global available
+
+	$(window).ready(UTIL.init);
+})(jQuery);
+
+/***/ }),
+
+/***/ "./scss/ts-cookieconsent-public.scss":
+/*!*******************************************!*\
+  !*** ./scss/ts-cookieconsent-public.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!*********************************************************************************!*\
+  !*** multi ./js/ts-cookieconsent-public.js ./scss/ts-cookieconsent-public.scss ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./js/ts-cookieconsent-public.js */"./js/ts-cookieconsent-public.js");
+module.exports = __webpack_require__(/*! ./scss/ts-cookieconsent-public.scss */"./scss/ts-cookieconsent-public.scss");
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=ts-cookieconsent-public.js.map
