@@ -252,17 +252,22 @@
     <section id="section6">
         <!-- Contact -->
         <div class="contact-form">
-            <h2>Contact Us</h2>
-            <p>Do you want to join CESI as an Affiliated Researcher or External Partner? Do you have a question about the center? You can email us or fill out this form. We love meeting new people!</p>
-            <form id="contactForm">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-            <div class="message" id="formMessage"></div>
-        </div>
+                          <h2>Contact Us</h2>
+              <p>Do you want to join CESI as an Affiliated Researcher or External Partner? Do you have a question about the center? You can email us or fill out this form. We love meeting new people!</p>
+              <!--<form id="contactForm"> -->
+                <form action="https://api.web3forms.com/submit" method="POST">
 
+                    <input type="hidden" name="access_key" value="5fcfd46e-c388-4cee-819f-c617a53e3f44">
+                
+                   <!-- <input type="text" name="name" required> -->
+                    <input type="text" id="name" placeholder="Your Name" required/>
+                    <input type="email" name="email" placeholder="your@email.com" required/>
+                    <textarea type="text" id="message" name="message" placeholder="Your message goes here." required> </textarea>
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                    <button type="submit">Submit Form</button>
+                    </form>
+            </form>
+        </div>
 
     <!--End Section 6-->
     
@@ -290,16 +295,21 @@
             </ul>
             <p></p>
         </div>
-        <div class="footer-column">
-            <h3>Our Monthly Newsletter</h3>
-            <p>Subscribe to our newsletter to receive once a month updates about our work!</p>
-            <form action="newsletter.php" method="post">
-            <div class="subscription-form">
-                <h2>Newsletter</h2>
-                <input type="email" id="email" placeholder="Enter your email" required>
-                <button onclick="subscribe()">Subscribe</button>
-                <div class="message" id="message"></div>
-            </div>
+       <div class="footer-column">
+           <h2>Sign-Up For our monthly newsletter</h2>
+           <form action="https://api.web3forms.com/submit" method="POST">
+
+            <input type="hidden" name="access_key" value="5fcfd46e-c388-4cee-819f-c617a53e3f44">
+        
+           <!-- <input type="text" name="name" required>-->
+            <input type="text" id="name" placeholder="Your Name" required/> 
+
+            <input type="email" name="email" placeholder="your@email.com" required/>
+           <!-- <textarea type="text" name="message" placeholder="Sign me up for the newsletter!" required> </textarea>-->
+            <input type="hidden" name="redirect" value="https://web3forms.com/success">
+            <button type="submit">Submit Form</button>
+        
+        </form>
         </div>
     </footer>
 <!--End Footer-->
