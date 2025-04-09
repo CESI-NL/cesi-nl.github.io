@@ -8,6 +8,7 @@ body, html {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: auto;
     width: 100%;
     max-width: 500px;
     height: auto;
@@ -15,7 +16,7 @@ body, html {
 }
 
 header {
-    background-image: url('images/OFFICIAL-Convergence Center for Energy System Intelligence logos/Convergence Center for Energy System Intelligence logos/RGB/Logo/CESI-hi-res-full.png');
+    background-image: url('images/CESI-hi-res-full.png');
     background-size: cover;
     color: rgb(13, 13, 14);
     text-align: center;
@@ -25,9 +26,11 @@ header {
     width: 100%;
     max-width: 80%;
     height: auto;
-    max-height:80%;
-    padding: 250px 0;
+    max-height: 80%;
+    padding: 250px ;
 }
+
+
 body, html {
     margin: 0;
     padding: 0;
