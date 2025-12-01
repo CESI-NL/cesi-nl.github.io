@@ -77,8 +77,8 @@ section {
 #sectionB { background: #EDF5FB; }
 #sectionC { background: #00FFA6; }
 #sectionD { background: #FFFFFF; }
-#sectionF { background: #EDF5FB; }
-#sectionG { background: #00FFA6; }
+#sectionE { background: #EDF5FB; }
+#sectionF { background: #00FFA6; }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1200px) {
@@ -102,6 +102,73 @@ section {
     }
 } 
 
+/*for grid of pictures and text*/
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.grid-item {
+    text-align: center;
+}
+.grid-item img {
+    width: 100%;
+    max-width: 150px; /* Adjust as needed */
+    height: auto;
+}
+.text-row {
+    margin-top: 10px;
+}
+
+/* for Thematic Groups */
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between rows and columns */
+}
+
+.image-grid img {
+    width: 200px; /* Set the width of the images */
+    height: 150px; /* Set the height of the images */
+    object-fit: cover; /* Ensure images cover the set dimensions */
+}
+
+/* for Contact Form*/
+.contact-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+}
+.contact-form h2 {
+    margin-bottom: 15px;
+}
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.contact-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #043BCB;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.contact-form button:hover {
+    background-color: #52D4FC;
+}
+.message {
+    margin-top: 10px;
+}
 
 /*for Footer*/
         .footer {
