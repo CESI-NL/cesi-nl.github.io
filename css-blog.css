@@ -1,0 +1,103 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.responsive-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    max-height: 500px;
+}
+
+header {
+    background-image: url('images/CESI-logos-centered.png');
+    background-size: cover;
+    color: rgb(13, 13, 14);
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80%;
+    height: auto;
+    max-height: 80%;
+    padding: 300px ;
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+
+nav {
+    background: #52D4FC;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: #043BCB;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Ensure section backgrounds are responsive */
+section {
+    padding: 80px;
+    height: fit-content; /* Use vh units for height */
+    width: 100%; /* Ensure sections take up full width */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+#section1 { background: #FFFFFF; }
+#section2 { background: #EDF5FB; }
+#section3 { background: #00FFA6; }
+#section4 { background: #FFFFFF; }
+#section5 { background: #EDF5FB; }
+#section6 { background: #00FFA6; }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    section {
+        padding: 60px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 40px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 20px;
+        height: fit-content;
+    }
+} 
